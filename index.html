@@ -480,6 +480,10 @@
             <select id="deviceYear"></select>
           </div>
           <div class="field">
+            <label for="deviceBrand">设备品牌</label>
+            <select id="deviceBrand"></select>
+          </div>
+          <div class="field full">
             <label for="deviceSelect">设备名称 / 版本</label>
             <select id="deviceSelect"></select>
           </div>
@@ -609,8 +613,8 @@ console.log(result.clientHints);</code></pre>
       { id:'surface-pro-9', platform:'windows', name:'Surface Pro 9', variant:'x64', year:2022, arch:'x86', bitness:'64', uaModel:'' },
       { id:'surface-laptop-5', platform:'windows', name:'Surface Laptop 5', variant:'x64', year:2022, arch:'x86', bitness:'64', uaModel:'' },
 
-      { id:'macbook-pro-m5-pro-14', platform:'macos', name:'MacBook Pro', variant:'14-inch · M5 Pro / M5 Max', year:2025, arch:'arm', bitness:'64', uaModel:'' },
-      { id:'macbook-pro-m5-14', platform:'macos', name:'MacBook Pro', variant:'14-inch · M5', year:2025, arch:'arm', bitness:'64', uaModel:'' },
+      { id:'macbook-pro-m5-pro-14', platform:'macos', name:'MacBook Pro', variant:'14-inch · M5 Pro / M5 Max · Mac17,7/Mac17,9', year:2026, arch:'arm', bitness:'64', uaModel:'' },
+      { id:'macbook-pro-m5-14', platform:'macos', name:'MacBook Pro', variant:'14-inch · M5 · Mac17,2', year:2025, arch:'arm', bitness:'64', uaModel:'' },
       { id:'macbook-air-m4-13', platform:'macos', name:'MacBook Air', variant:'13-inch · M4', year:2025, arch:'arm', bitness:'64', uaModel:'' },
       { id:'macbook-air-m4-15', platform:'macos', name:'MacBook Air', variant:'15-inch · M4', year:2025, arch:'arm', bitness:'64', uaModel:'' },
       { id:'mac-studio-m4-max', platform:'macos', name:'Mac Studio', variant:'M4 Max · Mac16,9', year:2025, arch:'arm', bitness:'64', uaModel:'' },
@@ -680,7 +684,7 @@ console.log(result.clientHints);</code></pre>
       { id:'galaxy-z-flip7', platform:'android', name:'Samsung Galaxy Z Flip7', variant:'SM-F766B', year:2025, arch:'arm', bitness:'64', uaModel:'SM-F766B', minTimeline:2025 },
       { id:'galaxy-s25-ultra', platform:'android', name:'Samsung Galaxy S25 Ultra', variant:'SM-S938B', year:2025, arch:'arm', bitness:'64', uaModel:'SM-S938B', minTimeline:2024 },
       { id:'galaxy-s25', platform:'android', name:'Samsung Galaxy S25', variant:'SM-S931B', year:2025, arch:'arm', bitness:'64', uaModel:'SM-S931B', minTimeline:2024 },
-      { id:'oneplus-13', platform:'android', name:'OnePlus 13', variant:'CPH2653', year:2025, arch:'arm', bitness:'64', uaModel:'CPH2653', minTimeline:2024 },
+      { id:'oneplus-13', platform:'android', name:'OnePlus 13', variant:'CPH2649', year:2025, arch:'arm', bitness:'64', uaModel:'CPH2649', minTimeline:2024 },
       { id:'xiaomi-15-ultra', platform:'android', name:'Xiaomi 15 Ultra', variant:'25010PN30G', year:2025, arch:'arm', bitness:'64', uaModel:'25010PN30G', minTimeline:2024 },
       { id:'pixel-9-pro-xl', platform:'android', name:'Google Pixel 9 Pro XL', variant:'Pixel 9 Pro XL', year:2024, arch:'arm', bitness:'64', uaModel:'Pixel 9 Pro XL', minTimeline:2024 },
       { id:'pixel-9', platform:'android', name:'Google Pixel 9', variant:'Pixel 9', year:2024, arch:'arm', bitness:'64', uaModel:'Pixel 9', minTimeline:2024 },
@@ -688,12 +692,12 @@ console.log(result.clientHints);</code></pre>
       { id:'galaxy-s24-ultra', platform:'android', name:'Samsung Galaxy S24 Ultra', variant:'SM-S928B', year:2024, arch:'arm', bitness:'64', uaModel:'SM-S928B', minTimeline:2023 },
       { id:'galaxy-s24', platform:'android', name:'Samsung Galaxy S24', variant:'SM-S921B', year:2024, arch:'arm', bitness:'64', uaModel:'SM-S921B', minTimeline:2023 },
       { id:'xiaomi-14-ultra', platform:'android', name:'Xiaomi 14 Ultra', variant:'24030PN60G', year:2024, arch:'arm', bitness:'64', uaModel:'24030PN60G', minTimeline:2023 },
-      { id:'oneplus-12', platform:'android', name:'OnePlus 12', variant:'CPH2581', year:2024, arch:'arm', bitness:'64', uaModel:'CPH2581', minTimeline:2023 },
+      { id:'oneplus-12', platform:'android', name:'OnePlus 12', variant:'CPH2573', year:2024, arch:'arm', bitness:'64', uaModel:'CPH2573', minTimeline:2023 },
       { id:'pixel-8-pro', platform:'android', name:'Google Pixel 8 Pro', variant:'Pixel 8 Pro', year:2023, arch:'arm', bitness:'64', uaModel:'Pixel 8 Pro', minTimeline:2023 },
       { id:'pixel-tablet', platform:'android', name:'Google Pixel Tablet', variant:'Pixel Tablet', year:2023, arch:'arm', bitness:'64', uaModel:'Pixel Tablet', formFactor:'tablet', minTimeline:2023 },
       { id:'galaxy-tab-s9-ultra', platform:'android', name:'Samsung Galaxy Tab S9 Ultra', variant:'SM-X916B', year:2023, arch:'arm', bitness:'64', uaModel:'SM-X916B', formFactor:'tablet', minTimeline:2023 },
       { id:'galaxy-s23-ultra', platform:'android', name:'Samsung Galaxy S23 Ultra', variant:'SM-S918B', year:2023, arch:'arm', bitness:'64', uaModel:'SM-S918B', minTimeline:2022 },
-      { id:'oneplus-11', platform:'android', name:'OnePlus 11 5G', variant:'CPH2449', year:2023, arch:'arm', bitness:'64', uaModel:'CPH2449', minTimeline:2022 },
+      { id:'oneplus-11', platform:'android', name:'OnePlus 11 5G', variant:'CPH2447', year:2023, arch:'arm', bitness:'64', uaModel:'CPH2447', minTimeline:2022 },
       { id:'xiaomi-13', platform:'android', name:'Xiaomi 13', variant:'2211133G', year:2023, arch:'arm', bitness:'64', uaModel:'2211133G', minTimeline:2022 },
       { id:'pixel-7-pro', platform:'android', name:'Google Pixel 7 Pro', variant:'Pixel 7 Pro', year:2022, arch:'arm', bitness:'64', uaModel:'Pixel 7 Pro', minTimeline:2022 },
       { id:'galaxy-s22-ultra', platform:'android', name:'Samsung Galaxy S22 Ultra', variant:'SM-S908B', year:2022, arch:'arm', bitness:'64', uaModel:'SM-S908B', minTimeline:2021 },
@@ -701,6 +705,181 @@ console.log(result.clientHints);</code></pre>
       { id:'galaxy-s21-ultra', platform:'android', name:'Samsung Galaxy S21 Ultra', variant:'SM-G998B', year:2021, arch:'arm', bitness:'64', uaModel:'SM-G998B', minTimeline:2020 },
       { id:'pixel-5', platform:'android', name:'Google Pixel 5', variant:'Pixel 5', year:2020, arch:'arm', bitness:'64', uaModel:'Pixel 5', minTimeline:2020 }
     ];
+
+    // 近五年补充目录。Android 型号来自 Google Play 支持设备目录；Apple/Windows
+    // 的型号和年份来自厂商技术规格页。竖线格式便于定期批量校对和维护。
+    var recentDeviceRows = [
+      'surface-pro-13-x2|windows|Microsoft|Microsoft Surface Pro|13-inch · 12th Edition · Snapdragon X2|2026|||2026|arm',
+      'surface-laptop-x2-138|windows|Microsoft|Microsoft Surface Laptop|13.8-inch · Snapdragon X2|2026|||2026|arm',
+      'surface-laptop-x2-15|windows|Microsoft|Microsoft Surface Laptop|15-inch · Snapdragon X2|2026|||2026|arm',
+      'thinkpad-x1-carbon-gen14|windows|Lenovo|Lenovo ThinkPad X1 Carbon|Gen 14|2026|||2026|x86',
+      'xps-13-9350|windows|Dell|Dell XPS 13|9350|2025|||2025|x86',
+      'thinkpad-x1-carbon-gen13|windows|Lenovo|Lenovo ThinkPad X1 Carbon|Gen 13 Aura Edition|2025|||2025|x86',
+      'xps-14-9440|windows|Dell|Dell XPS 14|9440|2024|||2024|x86',
+      'thinkpad-x1-carbon-gen12|windows|Lenovo|Lenovo ThinkPad X1 Carbon|Gen 12|2024|||2024|x86',
+      'xps-15-9530|windows|Dell|Dell XPS 15|9530|2023|||2023|x86',
+      'thinkpad-x1-carbon-gen11|windows|Lenovo|Lenovo ThinkPad X1 Carbon|Gen 11|2023|||2023|x86',
+      'xps-13-plus-9320|windows|Dell|Dell XPS 13 Plus|9320|2022|||2022|x86',
+      'thinkpad-x1-carbon-gen10|windows|Lenovo|Lenovo ThinkPad X1 Carbon|Gen 10|2022|||2022|x86',
+
+      'macbook-air-m5-13|macos|Apple|MacBook Air|13-inch · M5 · Mac17,3|2026|||2026|arm',
+      'macbook-air-m5-15|macos|Apple|MacBook Air|15-inch · M5 · Mac17,4|2026|||2026|arm',
+      'macbook-pro-m5p-16-2026|macos|Apple|MacBook Pro|16-inch · M5 Pro/Max · Mac17,6/Mac17,8|2026|||2026|arm',
+      'macbook-pro-m3-14|macos|Apple|MacBook Pro|14-inch · M3/M3 Pro/M3 Max|2023|||2023|arm',
+      'macbook-pro-m3-16|macos|Apple|MacBook Pro|16-inch · M3 Pro/M3 Max|2023|||2023|arm',
+      'macbook-pro-m2p-14|macos|Apple|MacBook Pro|14-inch · M2 Pro/M2 Max|2023|||2023|arm',
+      'macbook-pro-m2p-16|macos|Apple|MacBook Pro|16-inch · M2 Pro/M2 Max|2023|||2023|arm',
+      'mac-mini-m2|macos|Apple|Mac mini|M2 / M2 Pro|2023|||2023|arm',
+      'mac-studio-m2|macos|Apple|Mac Studio|M2 Max / M2 Ultra|2023|||2023|arm',
+      'macbook-pro-m2-13|macos|Apple|MacBook Pro|13-inch · M2|2022|||2022|arm',
+      'mac-studio-m1|macos|Apple|Mac Studio|M1 Max / M1 Ultra|2022|||2022|arm',
+
+      'ipad-air-m4-11|ipad|Apple|iPad Air|11-inch · M4|2026|iPad|tablet|2026|arm',
+      'ipad-air-m4-13|ipad|Apple|iPad Air|13-inch · M4|2026|iPad|tablet|2026|arm',
+      'ipad-pro-m2-11|ipad|Apple|iPad Pro|11-inch · 4th generation · M2|2022|iPad|tablet|2022|arm',
+
+      'pixel-10a|android|Google|Google Pixel 10a|Pixel 10a|2026|Pixel 10a||2026|arm',
+      'pixel-10-pro-fold|android|Google|Google Pixel 10 Pro Fold|Pixel 10 Pro Fold|2025|Pixel 10 Pro Fold||2025|arm',
+      'pixel-9a|android|Google|Google Pixel 9a|Pixel 9a|2025|Pixel 9a||2025|arm',
+      'pixel-9-pro|android|Google|Google Pixel 9 Pro|Pixel 9 Pro|2024|Pixel 9 Pro||2024|arm',
+      'pixel-9-pro-fold|android|Google|Google Pixel 9 Pro Fold|Pixel 9 Pro Fold|2024|Pixel 9 Pro Fold||2024|arm',
+      'pixel-8|android|Google|Google Pixel 8|Pixel 8|2023|Pixel 8||2023|arm',
+      'pixel-8a|android|Google|Google Pixel 8a|Pixel 8a|2024|Pixel 8a||2024|arm',
+      'pixel-7a|android|Google|Google Pixel 7a|Pixel 7a|2023|Pixel 7a||2023|arm',
+      'pixel-fold|android|Google|Google Pixel Fold|Pixel Fold|2023|Pixel Fold||2023|arm',
+      'pixel-7|android|Google|Google Pixel 7|Pixel 7|2022|Pixel 7||2022|arm',
+      'pixel-6a|android|Google|Google Pixel 6a|Pixel 6a|2022|Pixel 6a||2022|arm',
+
+      'galaxy-z-fold8|android|Samsung|Samsung Galaxy Z Fold8|SM-F971B|2026|SM-F971B||2026|arm',
+      'galaxy-z-fold8-ultra|android|Samsung|Samsung Galaxy Z Fold8 Ultra|SM-F976B|2026|SM-F976B||2026|arm',
+      'galaxy-z-flip8|android|Samsung|Samsung Galaxy Z Flip8|SM-F776B|2026|SM-F776B||2026|arm',
+      'galaxy-s26-fe|android|Samsung|Samsung Galaxy S26 FE|SM-S741B|2026|SM-S741B||2026|arm',
+      'galaxy-a57|android|Samsung|Samsung Galaxy A57 5G|SM-A576B|2026|SM-A576B||2026|arm',
+      'galaxy-a37|android|Samsung|Samsung Galaxy A37 5G|SM-A376B|2026|SM-A376B||2026|arm',
+      'galaxy-tab-s12-plus|android|Samsung|Samsung Galaxy Tab S12+|SM-X840|2026|SM-X840|tablet|2026|arm',
+      'galaxy-tab-s12-ultra|android|Samsung|Samsung Galaxy Tab S12 Ultra|SM-X940|2026|SM-X940|tablet|2026|arm',
+      'galaxy-s25-plus|android|Samsung|Samsung Galaxy S25+|SM-S936B|2025|SM-S936B||2025|arm',
+      'galaxy-s25-edge|android|Samsung|Samsung Galaxy S25 Edge|SM-S937B|2025|SM-S937B||2025|arm',
+      'galaxy-s25-fe|android|Samsung|Samsung Galaxy S25 FE|SM-S731B|2025|SM-S731B||2025|arm',
+      'galaxy-z-flip7-fe|android|Samsung|Samsung Galaxy Z Flip7 FE|SM-F761B|2025|SM-F761B||2025|arm',
+      'galaxy-a56|android|Samsung|Samsung Galaxy A56 5G|SM-A566B|2025|SM-A566B||2025|arm',
+      'galaxy-a36|android|Samsung|Samsung Galaxy A36 5G|SM-A366B|2025|SM-A366B||2025|arm',
+      'galaxy-tab-s11|android|Samsung|Samsung Galaxy Tab S11|SM-X730|2025|SM-X730|tablet|2025|arm',
+      'galaxy-tab-s11-ultra|android|Samsung|Samsung Galaxy Tab S11 Ultra|SM-X930|2025|SM-X930|tablet|2025|arm',
+      'galaxy-s24-plus|android|Samsung|Samsung Galaxy S24+|SM-S926B|2024|SM-S926B||2024|arm',
+      'galaxy-s24-fe|android|Samsung|Samsung Galaxy S24 FE|SM-S721B|2024|SM-S721B||2024|arm',
+      'galaxy-z-flip6|android|Samsung|Samsung Galaxy Z Flip6|SM-F741B|2024|SM-F741B||2024|arm',
+      'galaxy-a55|android|Samsung|Samsung Galaxy A55 5G|SM-A556B|2024|SM-A556B||2024|arm',
+      'galaxy-a35|android|Samsung|Samsung Galaxy A35 5G|SM-A356B|2024|SM-A356B||2024|arm',
+      'galaxy-tab-s10-plus|android|Samsung|Samsung Galaxy Tab S10+|SM-X820|2024|SM-X820|tablet|2024|arm',
+      'galaxy-tab-s10-ultra|android|Samsung|Samsung Galaxy Tab S10 Ultra|SM-X920|2024|SM-X920|tablet|2024|arm',
+      'galaxy-s23|android|Samsung|Samsung Galaxy S23|SM-S911B|2023|SM-S911B||2023|arm',
+      'galaxy-s23-plus|android|Samsung|Samsung Galaxy S23+|SM-S916B|2023|SM-S916B||2023|arm',
+      'galaxy-s23-fe|android|Samsung|Samsung Galaxy S23 FE|SM-S711B|2023|SM-S711B||2023|arm',
+      'galaxy-z-fold5|android|Samsung|Samsung Galaxy Z Fold5|SM-F946B|2023|SM-F946B||2023|arm',
+      'galaxy-z-flip5|android|Samsung|Samsung Galaxy Z Flip5|SM-F731B|2023|SM-F731B||2023|arm',
+      'galaxy-a54|android|Samsung|Samsung Galaxy A54 5G|SM-A546B|2023|SM-A546B||2023|arm',
+      'galaxy-tab-s9|android|Samsung|Samsung Galaxy Tab S9|SM-X710|2023|SM-X710|tablet|2023|arm',
+      'galaxy-tab-s9-plus|android|Samsung|Samsung Galaxy Tab S9+|SM-X810|2023|SM-X810|tablet|2023|arm',
+      'galaxy-s22|android|Samsung|Samsung Galaxy S22|SM-S901B|2022|SM-S901B||2022|arm',
+      'galaxy-s22-plus|android|Samsung|Samsung Galaxy S22+|SM-S906B|2022|SM-S906B||2022|arm',
+      'galaxy-z-fold4|android|Samsung|Samsung Galaxy Z Fold4|SM-F936B|2022|SM-F936B||2022|arm',
+      'galaxy-z-flip4|android|Samsung|Samsung Galaxy Z Flip4|SM-F721B|2022|SM-F721B||2022|arm',
+      'galaxy-a53|android|Samsung|Samsung Galaxy A53 5G|SM-A536B|2022|SM-A536B||2022|arm',
+      'galaxy-tab-s8|android|Samsung|Samsung Galaxy Tab S8|SM-X700|2022|SM-X700|tablet|2022|arm',
+      'galaxy-tab-s8-plus|android|Samsung|Samsung Galaxy Tab S8+|SM-X800|2022|SM-X800|tablet|2022|arm',
+      'galaxy-tab-s8-ultra|android|Samsung|Samsung Galaxy Tab S8 Ultra|SM-X900|2022|SM-X900|tablet|2022|arm',
+
+      'xiaomi-17|android|Xiaomi|Xiaomi 17|25113PN0EG|2026|25113PN0EG||2026|arm',
+      'xiaomi-17-ultra|android|Xiaomi|Xiaomi 17 Ultra|2512BPNDAG|2026|2512BPNDAG||2026|arm',
+      'xiaomi-17t|android|Xiaomi|Xiaomi 17T|2602DPT53G|2026|2602DPT53G||2026|arm',
+      'xiaomi-17t-pro|android|Xiaomi|Xiaomi 17T Pro|2602EPTC0G|2026|2602EPTC0G||2026|arm',
+      'redmi-note-15-pro|android|Xiaomi|Redmi Note 15 Pro 5G|25080RABDG|2026|25080RABDG||2026|arm',
+      'poco-f8-pro|android|Xiaomi|POCO F8 Pro|2510DPC44G|2026|2510DPC44G||2026|arm',
+      'xiaomi-15|android|Xiaomi|Xiaomi 15|24129PN74G|2025|24129PN74G||2025|arm',
+      'xiaomi-15t|android|Xiaomi|Xiaomi 15T|25069PTEBG|2025|25069PTEBG||2025|arm',
+      'xiaomi-15t-pro|android|Xiaomi|Xiaomi 15T Pro|2506BPN68G|2025|2506BPN68G||2025|arm',
+      'redmi-note-14-pro-plus|android|Xiaomi|Redmi Note 14 Pro+ 5G|24115RA8EG|2025|24115RA8EG||2025|arm',
+      'poco-f7|android|Xiaomi|POCO F7|25053PC47G|2025|25053PC47G||2025|arm',
+      'poco-f7-ultra|android|Xiaomi|POCO F7 Ultra|24122RKC7G|2025|24122RKC7G||2025|arm',
+      'xiaomi-14|android|Xiaomi|Xiaomi 14|23127PN0CG|2024|23127PN0CG||2024|arm',
+      'xiaomi-14t|android|Xiaomi|Xiaomi 14T|2406APNFAG|2024|2406APNFAG||2024|arm',
+      'xiaomi-14t-pro|android|Xiaomi|Xiaomi 14T Pro|2407FPN8EG|2024|2407FPN8EG||2024|arm',
+      'redmi-note-13-pro-plus|android|Xiaomi|Redmi Note 13 Pro+ 5G|23090RA98G|2024|23090RA98G||2024|arm',
+      'poco-f6|android|Xiaomi|POCO F6|24069PC21G|2024|24069PC21G||2024|arm',
+      'xiaomi-13-pro|android|Xiaomi|Xiaomi 13 Pro|2210132G|2023|2210132G||2023|arm',
+      'xiaomi-13-ultra|android|Xiaomi|Xiaomi 13 Ultra|2304FPN6DG|2023|2304FPN6DG||2023|arm',
+      'xiaomi-13t-pro|android|Xiaomi|Xiaomi 13T Pro|23078PND5G|2023|23078PND5G||2023|arm',
+      'poco-f5|android|Xiaomi|POCO F5|23049PCD8G|2023|23049PCD8G||2023|arm',
+      'xiaomi-12|android|Xiaomi|Xiaomi 12|2201123G|2022|2201123G||2022|arm',
+      'xiaomi-12-pro|android|Xiaomi|Xiaomi 12 Pro|2201122G|2022|2201122G||2022|arm',
+      'xiaomi-12t-pro|android|Xiaomi|Xiaomi 12T Pro|22081212UG|2022|22081212UG||2022|arm',
+      'poco-f4|android|Xiaomi|POCO F4|22021211RG|2022|22021211RG||2022|arm',
+
+      'oneplus-15r|android|OnePlus|OnePlus 15R|CPH2767|2026|CPH2767||2026|arm',
+      'oneplus-15t|android|OnePlus|OnePlus 15T|PLZ110|2026|PLZ110||2026|arm',
+      'oneplus-15|android|OnePlus|OnePlus 15|CPH2745|2025|CPH2745||2025|arm',
+      'oneplus-13r|android|OnePlus|OnePlus 13R|CPH2645|2025|CPH2645||2025|arm',
+      'oneplus-12r|android|OnePlus|OnePlus 12R|CPH2585|2024|CPH2585||2024|arm',
+      'oneplus-10t|android|OnePlus|OnePlus 10T 5G|CPH2413|2022|CPH2413||2022|arm',
+
+      'oppo-find-x9-ultra|android|OPPO|OPPO Find X9 Ultra|CPH2841|2026|CPH2841||2026|arm',
+      'oppo-find-x9s|android|OPPO|OPPO Find X9s|CPH2873|2026|CPH2873||2026|arm',
+      'oppo-find-x9-pro|android|OPPO|OPPO Find X9 Pro|CPH2791|2025|CPH2791||2025|arm',
+      'oppo-reno14-pro|android|OPPO|OPPO Reno14 Pro 5G|CPH2739|2025|CPH2739||2025|arm',
+      'oppo-find-x8-pro|android|OPPO|OPPO Find X8 Pro|CPH2659|2024|CPH2659||2024|arm',
+      'oppo-reno12-pro|android|OPPO|OPPO Reno12 Pro 5G|CPH2629|2024|CPH2629||2024|arm',
+      'oppo-find-x7-ultra|android|OPPO|OPPO Find X7 Ultra|PHY110|2023|PHY110||2023|arm',
+      'oppo-find-x5-pro|android|OPPO|OPPO Find X5 Pro|CPH2305|2022|CPH2305||2022|arm',
+
+      'vivo-x300-ultra|android|vivo|vivo X300 Ultra|V2547A|2026|V2547A||2026|arm',
+      'iqoo-15-ultra|android|iQOO|iQOO 15 Ultra|V2546A|2026|V2546A||2026|arm',
+      'vivo-x300-pro|android|vivo|vivo X300 Pro|V2502A|2025|V2502A||2025|arm',
+      'iqoo-15|android|iQOO|iQOO 15|I2501|2025|I2501||2025|arm',
+      'vivo-x200|android|vivo|vivo X200|V2415A|2024|V2415A||2024|arm',
+      'iqoo-13|android|iQOO|iQOO 13|I2401|2024|I2401||2024|arm',
+      'vivo-x90-pro|android|vivo|vivo X90 Pro|V2242A|2023|V2242A||2023|arm',
+      'iqoo-11|android|iQOO|iQOO 11|I2212|2023|I2212||2023|arm',
+      'vivo-x80-pro|android|vivo|vivo X80 Pro|V2185A|2022|V2185A||2022|arm',
+
+      'honor-magic8-pro|android|Honor|Honor Magic8 Pro|BKQ-N49|2026|BKQ-N49||2026|arm',
+      'honor-magic-v6|android|Honor|Honor Magic V6|PNM-N49|2026|PNM-N49||2026|arm',
+      'honor-magic7-pro|android|Honor|Honor Magic7 Pro|PTP-N49|2025|PTP-N49||2025|arm',
+      'honor-magic-v5|android|Honor|Honor Magic V5|MBH-N49|2025|MBH-N49||2025|arm',
+      'honor-magic6-pro|android|Honor|Honor Magic6 Pro|BVL-AN16|2024|BVL-AN16||2024|arm',
+      'honor-magic-v3|android|Honor|Honor Magic V3|FCP-N49|2024|FCP-N49||2024|arm',
+      'honor-magic5-pro|android|Honor|Honor Magic5 Pro|PGT-N19|2023|PGT-N19||2023|arm',
+      'honor-magic-v2|android|Honor|Honor Magic V2|VER-N49|2023|VER-N49||2023|arm',
+      'honor-magic4-pro|android|Honor|Honor Magic4 Pro|LGE-NX9|2022|LGE-NX9||2022|arm',
+
+      'nothing-phone-4a-pro|android|Nothing|Nothing Phone (4a) Pro|A069P|2026|A069P||2026|arm',
+      'nothing-phone-3|android|Nothing|Nothing Phone (3)|A024|2025|A024||2025|arm',
+      'nothing-phone-2a-plus|android|Nothing|Nothing Phone (2a) Plus|A142P|2024|A142P||2024|arm',
+      'nothing-phone-2|android|Nothing|Nothing Phone (2)|A065|2023|A065||2023|arm',
+      'nothing-phone-1|android|Nothing|Nothing Phone (1)|A063|2022|A063||2022|arm',
+      'huawei-pura80-ultra|android|Huawei|Huawei Pura 80 Ultra|LMU-LX9|2025|LMU-LX9||2025|arm',
+      'huawei-pura70-ultra|android|Huawei|Huawei Pura 70 Ultra|HBP-LX9|2024|HBP-LX9||2024|arm',
+      'sony-xperia-1-vii|android|Sony|Sony Xperia 1 VII|SO-51F|2025|SO-51F||2025|arm',
+      'sony-xperia-1-vi|android|Sony|Sony Xperia 1 VI|A401SO|2024|A401SO||2024|arm',
+      'sony-xperia-1-v|android|Sony|Sony Xperia 1 V|A301SO|2023|A301SO||2023|arm',
+      'sony-xperia-1-iv|android|Sony|Sony Xperia 1 IV|A201SO|2022|A201SO||2022|arm',
+      'asus-rog-phone-9-pro|android|ASUS|ASUS ROG Phone 9 Pro|ASUSAI2501A|2024|ASUSAI2501A||2024|arm',
+      'asus-rog-phone-7|android|ASUS|ASUS ROG Phone 7|ASUS_AI2205_A|2023|ASUS_AI2205_A||2023|arm',
+      'asus-rog-phone-6|android|ASUS|ASUS ROG Phone 6|ASUS_AI2201_A|2022|ASUS_AI2201_A||2022|arm'
+    ];
+
+    var deviceIndex = {};
+    devices.forEach(function (device) { device.brand = device.brand || inferBrand(device.name, device.platform); deviceIndex[device.id] = device; });
+    recentDeviceRows.forEach(function (row) {
+      var p = row.split('|');
+      var device = {
+        id:p[0], platform:p[1], brand:p[2], name:p[3], variant:p[4], year:Number(p[5]),
+        uaModel:p[6] || '', formFactor:p[7] || undefined, minTimeline:Number(p[8]) || Number(p[5]),
+        arch:p[9] || (p[1] === 'windows' ? 'x86' : 'arm'), bitness:'64'
+      };
+      deviceIndex[device.id] = device;
+    });
+    devices = Object.keys(deviceIndex).map(function (id) { return deviceIndex[id]; });
 
     var osVersions = [
       { id:'win11-26h1', platform:'windows', name:'Windows 11 26H1', version:'26H1', year:2026, date:'2026-02-10', build:'28000', ua:'10.0', ch:'19.0.0', timeline:2026 },
@@ -800,6 +979,13 @@ console.log(result.clientHints);</code></pre>
     function currentOS() { return byId(osVersions, document.getElementById('osSelect').value); }
     function currentVersion() { return document.getElementById('browserVersion').value; }
     function deviceLabel(d) { return d.name + (d.variant ? ' · ' + d.variant : ''); }
+    function inferBrand(name, platform) {
+      if (platform === 'macos' || platform === 'iphone' || platform === 'ipad') return 'Apple';
+      var brands = ['Microsoft','Lenovo','Dell','Samsung','Google','Xiaomi','Redmi','POCO','OnePlus','OPPO','realme','vivo','iQOO','Honor','Huawei','Nothing','Motorola','Sony','ASUS'];
+      var found = brands.find(function (brand) { return name.toLowerCase().indexOf(brand.toLowerCase()) >= 0; });
+      if (found === 'Redmi' || found === 'POCO') return 'Xiaomi';
+      return found || (platform === 'windows' ? '通用 / 其他' : '其他');
+    }
 
     function setBrowser(browser) {
       state.browser = browser;
@@ -816,6 +1002,7 @@ console.log(result.clientHints);</code></pre>
       state.platform = platform;
       document.querySelectorAll('[data-platform]').forEach(function (el) { el.classList.toggle('active', el.dataset.platform === platform); });
       populateYears();
+      populateBrands();
       populateDevices();
       populateOS();
       populateBrowserVersions();
@@ -838,9 +1025,24 @@ console.log(result.clientHints);</code></pre>
       select.innerHTML = '<option value="all">全部年份</option>' + years.map(function (y) { return '<option value="' + y + '">' + y + ' 年</option>'; }).join('');
     }
 
-    function populateDevices() {
+    function populateBrands() {
+      var select = document.getElementById('deviceBrand');
       var year = document.getElementById('deviceYear').value;
       var list = devices.filter(function (d) { return d.platform === state.platform && (year === 'all' || String(d.year) === year); });
+      var brands = Array.from(new Set(list.map(function (d) { return d.brand || inferBrand(d.name, d.platform); }))).sort();
+      var old = select.value;
+      select.innerHTML = '<option value="all">全部品牌</option>' + brands.map(function (brand) { return '<option value="' + brand + '">' + brand + '</option>'; }).join('');
+      if (brands.indexOf(old) >= 0) select.value = old;
+    }
+
+    function populateDevices() {
+      var year = document.getElementById('deviceYear').value;
+      var brand = document.getElementById('deviceBrand').value;
+      var list = devices.filter(function (d) {
+        return d.platform === state.platform &&
+          (year === 'all' || String(d.year) === year) &&
+          (brand === 'all' || (d.brand || inferBrand(d.name, d.platform)) === brand);
+      });
       list.sort(function (a,b) { return b.year - a.year || deviceLabel(a).localeCompare(deviceLabel(b)); });
       var select = document.getElementById('deviceSelect');
       var old = select.value;
@@ -957,6 +1159,7 @@ console.log(result.clientHints);</code></pre>
           platform: platform,
           platformName: platformNames[platform],
           deviceId: device.id,
+          deviceBrand: device.brand || inferBrand(device.name, device.platform),
           deviceName: device.name,
           deviceVariant: device.variant,
           deviceYear: device.year,
@@ -994,6 +1197,7 @@ console.log(result.clientHints);</code></pre>
       status.textContent = result.warning || '组合有效';
       status.classList.toggle('warning', !!result.warning);
       document.getElementById('deviceMeta').innerHTML =
+        '<span class="tag">品牌：' + (device.brand || inferBrand(device.name, device.platform)) + '</span>' +
         '<span class="tag">设备：' + device.name + '</span>' +
         '<span class="tag">型号：' + device.variant + '</span>' +
         '<span class="tag">年份：' + device.year + '</span>' +
@@ -1003,6 +1207,7 @@ console.log(result.clientHints);</code></pre>
       var details = [
         ['浏览器', (state.browser === 'chrome' ? 'Google Chrome' : state.browser === 'edge' ? 'Microsoft Edge' : 'Apple Safari') + ' ' + c.browserVersion],
         ['设备平台', c.platformName],
+        ['设备品牌', c.deviceBrand],
         ['设备名称', c.deviceName],
         ['型号 / 版本', c.deviceVariant],
         ['设备年份', String(c.deviceYear)],
@@ -1035,6 +1240,8 @@ console.log(result.clientHints);</code></pre>
       var deviceList = devices.filter(function (d) { return d.platform === state.platform; });
       var device = randomItem(deviceList);
       document.getElementById('deviceYear').value = String(device.year);
+      populateBrands();
+      document.getElementById('deviceBrand').value = device.brand || inferBrand(device.name, device.platform);
       populateDevices();
       document.getElementById('deviceSelect').value = device.id;
       var validOS = osVersions.filter(function (os) { return os.platform === state.platform && (!device.minTimeline || os.timeline >= device.minTimeline); });
@@ -1120,10 +1327,10 @@ console.log(result.clientHints);</code></pre>
     function csvEscape(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '""') + '"'; }
     function exportCSV() {
       if (!state.batch.length) addBatch();
-      var headers = ['browser','browserVersion','platform','deviceName','deviceVariant','deviceYear','osName','osVersion','osYear','mode','userAgent'];
+      var headers = ['browser','browserVersion','platform','deviceBrand','deviceName','deviceVariant','deviceYear','osName','osVersion','osYear','mode','userAgent'];
       var rows = state.batch.map(function (item) {
         var c = item.config;
-        return [c.browser,c.browserVersion,c.platform,c.deviceName,c.deviceVariant,c.deviceYear,c.osName,c.osVersion,c.osYear,c.mode,item.ua].map(csvEscape).join(',');
+        return [c.browser,c.browserVersion,c.platform,c.deviceBrand,c.deviceName,c.deviceVariant,c.deviceYear,c.osName,c.osVersion,c.osYear,c.mode,item.ua].map(csvEscape).join(',');
       });
       download('ua-configs-' + DATA_VERIFIED_AT + '.csv', '\ufeff' + headers.join(',') + '\n' + rows.join('\n'), 'text/csv;charset=utf-8');
     }
@@ -1142,35 +1349,47 @@ console.log(result.clientHints);</code></pre>
       btn.disabled = true;
       btn.textContent = '正在连接官方接口…';
       try {
-        var chromePlatform = state.platform === 'windows' ? 'win' : state.platform === 'macos' ? 'mac' : state.platform === 'android' ? 'android' : 'ios';
-        var responses = await Promise.all([
-          fetch('https://versionhistory.googleapis.com/v1/chrome/platforms/' + chromePlatform + '/channels/stable/versions?pageSize=80').then(function (r) { return r.json(); }),
-          fetch('https://edgeupdates.microsoft.com/api/products?view=enterprise').then(function (r) { return r.json(); })
-        ]);
-        var chromeAll = responses[0].versions.map(function (x) { return x.version; });
-        var chromeLatest = [];
-        var seen = {};
-        chromeAll.forEach(function (v) { var m = major(v); if (!seen[m] && chromeLatest.length < 8) { seen[m] = true; chromeLatest.push(v); } });
-        var chromeBucket = getVersionBucket('chrome', state.platform);
-        browserVersions.chrome[chromeBucket] = chromeLatest;
+        if (location.protocol === 'file:') {
+          throw new Error('FILE_PROTOCOL');
+        }
+        var response;
+        var payload;
+        var usedCache = false;
+        try {
+          response = await fetch('./api/browser-versions', { cache:'no-store' });
+          if (!response.ok) throw new Error('API_' + response.status);
+          payload = await response.json();
+        } catch (apiError) {
+          response = await fetch('./data/browser-versions.json?ts=' + Date.now(), { cache:'no-store' });
+          if (!response.ok) throw apiError;
+          payload = await response.json();
+          usedCache = true;
+        }
 
-        var stable = responses[1].find(function (p) { return p.Product === 'Stable'; });
-        var edgeAll = stable.Releases.map(function (x) { return x.ProductVersion; }).sort(function (a,b) {
-          var pa = a.split('.').map(Number), pb = b.split('.').map(Number);
-          for (var i=0;i<4;i++) if (pa[i] !== pb[i]) return pb[i]-pa[i];
-          return 0;
+        ['chrome','edge','safari'].forEach(function (browser) {
+          var source = payload.sources && payload.sources[browser];
+          if (!source || !source.versions) return;
+          ['desktop','android','ios'].forEach(function (bucket) {
+            if (Array.isArray(source.versions[bucket]) && source.versions[bucket].length) {
+              browserVersions[browser][bucket] = source.versions[bucket].slice();
+            }
+          });
         });
-        var edgeLatest = [], edgeSeen = {};
-        edgeAll.forEach(function (v) { var m = major(v); if (!edgeSeen[m] && edgeLatest.length < 8) { edgeSeen[m] = true; edgeLatest.push(v); } });
-        browserVersions.edge.desktop = edgeLatest;
-        browserVersions.edge.android = edgeLatest.slice();
-        browserVersions.edge.ios = edgeLatest.slice();
         populateBrowserVersions();
         render();
-        document.getElementById('verifiedBadge').textContent = '✓ 浏览器版本刚刚刷新';
-        toast('已从 Google / Microsoft 官方接口刷新');
+        var time = payload.verifiedAt ? new Date(payload.verifiedAt).toLocaleString('zh-CN', { hour12:false }) : '刚刚';
+        document.getElementById('verifiedBadge').textContent = '✓ 浏览器版本更新于 ' + time;
+        var status = ['chrome','edge','safari'].map(function (browser) {
+          var source = payload.sources && payload.sources[browser];
+          return browser.charAt(0).toUpperCase() + browser.slice(1) + (source && source.ok && !source.cached ? ' ✓' : ' 缓存');
+        }).join(' · ');
+        toast((usedCache ? '已载入本地核验数据：' : '联网刷新完成：') + status);
       } catch (error) {
-        toast('联网刷新失败，继续使用内置核验数据');
+        if (error.message === 'FILE_PROTOCOL') {
+          toast('请运行 start-ua-server.cmd 后再刷新（直接打开受跨域限制）');
+        } else {
+          toast('联网与本地回退均失败，继续使用页面内置数据');
+        }
       } finally {
         btn.disabled = false;
         btn.textContent = '↻ 联网刷新版本';
@@ -1189,7 +1408,8 @@ console.log(result.clientHints);</code></pre>
       var btn = e.target.closest('[data-mode]');
       if (btn) setMode(btn.dataset.mode);
     });
-    document.getElementById('deviceYear').addEventListener('change', function () { populateDevices(); render(); });
+    document.getElementById('deviceYear').addEventListener('change', function () { populateBrands(); populateDevices(); render(); });
+    document.getElementById('deviceBrand').addEventListener('change', function () { populateDevices(); render(); });
     document.getElementById('deviceSelect').addEventListener('change', render);
     document.getElementById('osSelect').addEventListener('change', render);
     document.getElementById('browserVersion').addEventListener('change', render);

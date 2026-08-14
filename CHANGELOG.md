@@ -2,6 +2,20 @@
 
 所有重要变更记录在此文件中。
 
+## [1.1.0] - 2026-08-15
+
+### Added
+
+- 扩展 2022–2026 年设备目录，覆盖更多 Apple、Microsoft、Google、Samsung、Xiaomi、OnePlus、OPPO、vivo、iQOO、Honor、Huawei、Nothing、Sony、ASUS、Dell 与 Lenovo 型号。
+- 新增设备品牌筛选，并在 JSON/CSV 配置中导出 `deviceBrand`。
+- 新增零依赖本地服务、一键启动脚本和浏览器版本缓存更新脚本。
+
+### Fixed
+
+- 修复官方 Chrome/Edge 接口缺少 CORS 响应头导致“联网刷新版本”始终失败的问题。
+- Chrome 与 Edge 改为独立刷新；单一来源失败不再导致全部刷新失败。
+- 普通静态托管自动回退到本地核验缓存，直接打开文件时给出明确启动提示。
+
 ## [1.0.0] - 2026-08-15
 
 ### Added

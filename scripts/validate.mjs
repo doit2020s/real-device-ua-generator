@@ -4,6 +4,7 @@ import vm from 'node:vm';
 const file = new URL('../index.html', import.meta.url);
 const html = fs.readFileSync(file, 'utf8');
 const failures = [];
+const root = new URL('../', import.meta.url);
 
 function requireMatch(pattern, message) {
   if (!pattern.test(html)) failures.push(message);
@@ -20,6 +21,8 @@ requireMatch(/function\s+generateUA\s*\(/, '缺少 UA 生成函数');
 requireMatch(/function\s+exportJSON\s*\(/, '缺少 JSON 导出');
 requireMatch(/function\s+exportCSV\s*\(/, '缺少 CSV 导出');
 requireMatch(/DATA_VERIFIED_AT\s*=\s*'\d{4}-\d{2}-\d{2}'/, '核验日期格式错误');
+requireMatch(/id="deviceBrand"/, '缺少设备品牌筛选');
+requireMatch(/fetch\('\.\/api\/browser-versions'/, '缺少同源浏览器版本接口');
 
 const scripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/gi));
 if (scripts.length !== 1) {
@@ -34,6 +37,21 @@ if (scripts.length !== 1) {
 
 const deviceRecords = (html.match(/\{\s*id:'[^']+',\s*platform:'(?:windows|macos|android|iphone|ipad)'/g) || []).length;
 if (deviceRecords < 60) failures.push('设备/系统数据条目异常偏少：' + deviceRecords);
+const recentDeviceRows = (html.match(/^\s*'[^']+\|(?:windows|macos|android|iphone|ipad)\|/gm) || []).length;
+if (recentDeviceRows < 100) failures.push('近五年补充设备条目异常偏少：' + recentDeviceRows);
+
+for (const relative of ['server.mjs', 'data/browser-versions.json', 'scripts/browser-data-lib.mjs', 'scripts/update-browser-data.mjs']) {
+  if (!fs.existsSync(new URL(relative, root))) failures.push('缺少文件：' + relative);
+}
+
+try {
+  const browserData = JSON.parse(fs.readFileSync(new URL('data/browser-versions.json', root), 'utf8'));
+  for (const browser of ['chrome', 'edge', 'safari']) {
+    if (!browserData.sources?.[browser]?.versions?.desktop?.length) failures.push('版本缓存缺少：' + browser);
+  }
+} catch (error) {
+  failures.push('浏览器版本缓存无效：' + error.message);
+}
 
 if (failures.length) {
   console.error('验证失败：');
@@ -45,3 +63,4 @@ console.log('验证通过');
 console.log('- HTML 字节：' + Buffer.byteLength(html, 'utf8'));
 console.log('- 内联脚本：1');
 console.log('- 设备/系统条目（正则计数）：' + deviceRecords);
+console.log('- 近五年补充设备：' + recentDeviceRows);

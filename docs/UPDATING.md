@@ -45,10 +45,23 @@
   https://support.google.com/pixelphone/answer/7158570
 - Samsung 官方产品页：
   https://www.samsung.com/smartphones/
+- Google Play 支持设备目录（营销名称与 Build.MODEL）：
+  https://storage.googleapis.com/play_public/supported_devices.csv
 
 ## 3. 每月浏览器版本更新
 
-在 index.html 中找到 browserVersions。
+运行自动更新脚本：
+
+~~~powershell
+node scripts/update-browser-data.mjs
+node scripts/validate.mjs
+~~~
+
+脚本使用服务端 `fetch` 调用 Google/Microsoft 官方接口，不受浏览器 CORS 限制。Chrome 与 Edge 任一来源失败时会单独回退，另一来源仍可更新；Safari 继续使用经 Apple 发布说明人工核验的数据。结果写入 `data/browser-versions.json`，供普通静态托管回退。
+
+页面中的内置 `browserVersions` 是最后一道离线回退，应在发布版本时同步核对。
+
+`.github/workflows/update-browser-data.yml` 会在每月 2 日自动运行，也可在 GitHub Actions 页面手动触发。只有缓存内容发生变化时才提交；Safari 仍需人工核对后再修改。
 
 ### Chrome
 
@@ -122,6 +135,12 @@ Android 需要注意：
 
 在 index.html 中找到 devices。
 
+2022 年及以后的大批量补充条目集中在 `recentDeviceRows`，字段顺序为：
+
+~~~text
+id|platform|brand|name|variant|year|uaModel|formFactor|minTimeline|arch
+~~~
+
 每条设备至少包含：
 
 - id
@@ -171,8 +190,10 @@ Android 需要注意：
 
 ~~~powershell
 node scripts/validate.mjs
-python -m http.server 8080
+node server.mjs
 ~~~
+
+浏览器访问 http://localhost:8080，点击“联网刷新版本”，确认提示中 Chrome/Edge 显示 `✓`；Safari 显示缓存是正常行为，因为其版本需结合 Apple 系统版本人工核验。
 
 在桌面和窄屏浏览器中检查：
 
@@ -188,7 +209,7 @@ python -m http.server 8080
 
 ~~~powershell
 git switch -c update/browser-data-YYYY-MM
-git add index.html CHANGELOG.md
+git add index.html data scripts server.mjs start-ua-server.cmd CHANGELOG.md
 git commit -m "data: refresh browser versions for YYYY-MM"
 git push -u origin update/browser-data-YYYY-MM
 ~~~

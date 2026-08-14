@@ -6,37 +6,37 @@
 
 - 选择 Chrome、Edge 或 Safari。
 - 选择 Windows、macOS、Android、iPhone、iPad。
-- 按设备发布年份筛选真实设备名称与型号。
+- 按发布年份和品牌筛选真实设备名称、版本与型号。
 - 选择操作系统版本、发布日期、Windows Build 或 Android API Level。
 - 生成现代精简 UA 或传统完整 UA。
 - 为支持的平台生成 UA Client Hints。
 - 随机生成组合，批量导出 JSON 或 CSV。
 - 通过 window.UAGenerator 在其他 JavaScript 中调用。
-- 可从 Google 和 Microsoft 官方接口临时刷新浏览器版本。
+- 通过同源本地服务从 Google 和 Microsoft 官方接口刷新，并在断网或普通静态托管时使用核验缓存。
 
 ## 快速使用
 
 ### 直接打开
 
-双击 index.html。页面不依赖 npm、数据库或后端服务。
+双击 index.html。页面不依赖 npm、数据库或后端服务，除“联网刷新版本”外的功能均可使用。
 
 ### 本地 HTTP 服务
 
-在项目目录运行：
+推荐双击 `start-ua-server.cmd`，或在项目目录运行：
 
 ~~~powershell
-python -m http.server 8080
+node server.mjs
 ~~~
 
 浏览器访问 http://localhost:8080。
 
-使用本地 HTTP 服务时，剪贴板和部分浏览器安全 API 的兼容性通常比 file 协议更好。
+该服务不需要安装依赖，既提供页面，也把 Chrome/Edge 官方接口转换为同源 `/api/browser-versions`，从根本上避开浏览器 CORS 限制。使用 `python -m http.server 8080` 等普通静态服务时，刷新按钮会自动读取 `data/browser-versions.json` 核验缓存。
 
 ## 页面操作
 
 1. 选择浏览器。
 2. 选择设备平台。
-3. 选择设备年份和设备名称/型号。
+3. 选择设备年份、品牌和设备名称/型号。
 4. 选择操作系统与浏览器版本。
 5. 选择“现代真实 UA”或“传统完整 UA”。
 6. 复制 UA，或切换至“批量生成”导出 JSON/CSV。
@@ -100,15 +100,22 @@ UAGenerator.verifiedAt;
 ~~~text
 .
 ├─ index.html                 单文件应用：HTML、CSS、数据与 JavaScript
+├─ server.mjs                 零依赖静态服务与官方版本同源代理
+├─ start-ua-server.cmd        Windows 一键启动脚本
+├─ data/
+│  └─ browser-versions.json   普通静态托管使用的版本缓存
 ├─ README.md                  使用文档
 ├─ CHANGELOG.md               版本变更记录
 ├─ docs/
 │  └─ UPDATING.md             数据和版本更新方案
 ├─ scripts/
+│  ├─ browser-data-lib.mjs    官方接口读取和版本归一化
+│  ├─ update-browser-data.mjs 手动更新浏览器版本缓存
 │  └─ validate.mjs            本地静态验证脚本
 └─ .github/
    └─ workflows/
-      └─ validate.yml         GitHub Actions 自动检查
+      ├─ validate.yml         GitHub Actions 自动检查
+      └─ update-browser-data.yml 每月自动刷新版本缓存
 ~~~
 
 ## 验证
@@ -117,6 +124,12 @@ UAGenerator.verifiedAt;
 
 ~~~powershell
 node scripts/validate.mjs
+~~~
+
+手动更新本地版本缓存：
+
+~~~powershell
+node scripts/update-browser-data.mjs
 ~~~
 
 验证脚本会检查：
@@ -143,7 +156,7 @@ node scripts/validate.mjs
 
 建议节奏：
 
-- 每月：更新 Chrome、Edge、Safari 稳定版本。
+- 每月：GitHub Actions 自动更新 Chrome/Edge 缓存；人工核对 Safari 稳定版本。
 - 每季度：补充设备与操作系统版本。
 - 新设备发布后：核对名称、年份和 Android Build.MODEL。
 - 浏览器 UA 规则改变时：立即更新生成模板并发布补丁。
