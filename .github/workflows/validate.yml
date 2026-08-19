@@ -23,4 +23,6 @@ jobs:
           node-version: 22
 
       - name: Validate standalone app
-        run: node scripts/validate.mjs
+        run: |
+          node scripts/validate.mjs
+          node scripts/test-harmony-ua.mjs

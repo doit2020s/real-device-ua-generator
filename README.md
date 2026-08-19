@@ -1,11 +1,11 @@
 # 真实设备 UA 生成器
 
-一个无需构建、打开即用的中文 User-Agent 生成页面。它基于官方版本资料维护 Chrome、Microsoft Edge、Safari、Windows、macOS、Android、iPhone 和 iPad 的常用真实组合。
+一个无需构建、打开即用的中文 User-Agent 生成页面。它基于官方版本资料维护 Chrome、Microsoft Edge、Safari、华为浏览器 / ArkWeb，以及 Windows、macOS、Android、iPhone、iPad 和 HarmonyOS / OpenHarmony 的常用真实组合。
 
 ## 功能
 
-- 选择 Chrome、Edge 或 Safari。
-- 选择 Windows、macOS、Android、iPhone、iPad。
+- 选择 Chrome、Edge、Safari、华为浏览器或 ArkWeb 默认组件。
+- 选择 Windows、macOS、Android、iPhone、iPad、HarmonyOS / OpenHarmony。
 - 按发布年份和品牌筛选真实设备名称、版本与型号。
 - 选择操作系统版本、发布日期、Windows Build 或 Android API Level。
 - 生成现代精简 UA 或传统完整 UA。
@@ -13,6 +13,7 @@
 - 随机生成组合，批量导出 JSON 或 CSV。
 - 通过 window.UAGenerator 在其他 JavaScript 中调用。
 - 通过同源本地服务从 Google 和 Microsoft 官方接口刷新，并在断网或普通静态托管时使用核验缓存。
+- 鸿蒙系统版本联动 Phone / Tablet / PC、OpenHarmony、Chrome 兼容版本、ArkWeb VersionCode 与 HuaweiBrowser 版本档案。
 
 ## 快速使用
 
@@ -48,6 +49,15 @@ node server.mjs
 | 现代真实 UA | 模拟当前浏览器默认上报行为 | Chrome/Edge 会冻结次版本、系统版本或 Android 型号；Safari 也会冻结部分 OS 信息 |
 | 传统完整 UA | 兼容性测试、旧日志格式构造 | 尽可能保留浏览器完整版本、Android 型号和实际 OS 版本 |
 
+鸿蒙平台中两个模式的含义会自动调整为：
+
+| 模式 | 输出 |
+| --- | --- |
+| 官方标准 UA | 华为 ArkWeb 文档定义的 `OpenHarmony + Chrome/x.0.0.0 + ArkWeb/a.b.c.d` 基础结构 |
+| 浏览器兼容 UA | 华为浏览器实测兼容结构，可包含 `Android 10` 兼容字段并追加 `HuaweiBrowser/x.y.z`；该字段不表示设备运行 Android |
+
+“鸿蒙 UA 类型”还可选择只生成 ArkWeb 默认 Web 组件 UA，或生成带 `HuaweiBrowser` 后缀的华为浏览器 UA。鸿蒙 UA 不包含所选设备的营销名称；设备名称、类型和年份保留在导出配置中。
+
 现代浏览器的 UA 不一定包含用户在页面中选择的具体硬件：
 
 - Windows 10 与 Windows 11 的传统 UA 都可能显示 Windows NT 10.0。
@@ -62,11 +72,12 @@ node server.mjs
 
 ~~~javascript
 const result = UAGenerator.generate({
-  browser: 'chrome',
-  platform: 'android',
-  deviceId: 'pixel-10-pro-xl',
-  osId: 'android-16',
-  version: '152.0.7977.42',
+  browser: 'huawei',
+  platform: 'harmonyos',
+  deviceId: 'harmony-pura80-ultra',
+  osId: 'harmony-6-1-1',
+  version: '6.1.6.310',
+  harmonyUaType: 'huawei',
   mode: 'legacy'
 });
 
@@ -79,12 +90,13 @@ console.log(result.config);
 
 | 参数 | 可选值/说明 |
 | --- | --- |
-| browser | chrome、edge、safari |
-| platform | windows、macos、android、iphone、ipad |
+| browser | chrome、edge、safari、huawei |
+| platform | windows、macos、android、iphone、ipad、harmonyos |
 | deviceId | UAGenerator.devices 中的设备 id |
 | osId | UAGenerator.operatingSystems 中的系统 id |
 | version | 浏览器完整版本字符串 |
 | mode | reduced 或 legacy |
+| harmonyUaType | 鸿蒙专用：huawei（华为浏览器）或 arkweb（默认 Web 组件） |
 
 ### 可读取的数据
 
@@ -124,6 +136,7 @@ UAGenerator.verifiedAt;
 
 ~~~powershell
 node scripts/validate.mjs
+node scripts/test-harmony-ua.mjs
 ~~~
 
 手动更新本地版本缓存：
@@ -145,6 +158,7 @@ node scripts/update-browser-data.mjs
 - Microsoft Edge Update API 与 Stable Channel Release Notes
 - Apple Security Releases 与 Safari Release Notes
 - Android Developers 版本文档
+- Huawei HarmonyOS ArkWeb 默认 User-Agent 文档与 OpenHarmony ArkWeb 版本说明
 - Microsoft Windows Release Health
 - Apple、Google Pixel、Samsung 官方设备资料
 
@@ -171,4 +185,8 @@ node scripts/update-browser-data.mjs
 
 UA 是客户端声明字符串，不能证明请求来自对应真实设备。项目适用于网页兼容性测试、测试数据生成、日志分析和受控设备模拟，不应被用于绕过访问控制或冒充可信设备。
 
-本仓库为私有仓库，未附带开源许可证；除仓库所有者明确授权外，不授予公开分发权。
+公开仓库：https://github.com/doit2020s/real-device-ua-generator
+
+在线页面：https://doit2020s.github.io/real-device-ua-generator/
+
+仓库当前未附带开源许可证；公开可见不等于自动授予复制、修改或再分发权。

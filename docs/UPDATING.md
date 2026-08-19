@@ -36,6 +36,12 @@
   https://learn.microsoft.com/windows/release-health/windows11-release-information
 - Apple 系统版本：
   https://support.apple.com/109033
+- HarmonyOS 版本记录：
+  https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/changelogs-600
+- Huawei ArkWeb 默认 User-Agent：
+  https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/web-default-useragent
+- OpenHarmony ArkWeb 兼容版本说明：
+  https://gitcode.com/openharmony-tpc/chromium_src/blob/master/web/ReleaseNote/CompatibleWithLegacyWebEngine_6.0.md
 
 ### 设备
 
@@ -131,6 +137,16 @@ Android 需要注意：
 - 现代 Chromium UA Reduction 通常使用 Android 10; K。
 - 真实 OS 与型号应通过高熵 Client Hints 请求，且浏览器可能拒绝返回。
 
+HarmonyOS / OpenHarmony 需要注意：
+
+- 默认 ArkWeb UA 的设备类型只能使用 `Phone`、`Tablet` 或 `PC`。
+- 系统标识使用 `OpenHarmony M.S`，不把鸿蒙设备套入 Android 的 `Linux; Android ...; Build.MODEL` 模板。
+- Chrome 字段是 ArkWeb 的 Chromium 兼容版本，并不等于用户安装的 Chrome 浏览器版本。
+- `ArkWeb/a.b.c.d` 必须跟随系统档案维护；HarmonyOS 6.0 默认兼容 Chrome 132，较旧 ArkWeb 兼容档案可能仍是 Chrome 114。
+- `HuaweiBrowser/x.y.z` 属于华为浏览器扩展字段，不出现在 ArkWeb 默认 Web 组件 UA 中。
+- 华为浏览器为兼容网站可能追加 `Android 10` 等字段。这是兼容声明，不代表系统是 Android；必须保留 `OpenHarmony` 与 `ArkWeb` 作为识别依据。
+- 华为没有提供覆盖每次应用灰度更新的公开结构化版本接口。`browserVersions` 应只保存经真机/公开诊断样本核验的代表档案，并与官方 ArkWeb 基础格式区分标注。
+
 ## 5. 新设备更新
 
 在 index.html 中找到 devices。
@@ -184,7 +200,9 @@ id|platform|brand|name|variant|year|uaModel|formFactor|minTimeline|arch
 3. Chrome + iPhone/iPad。
 4. Edge + Windows/macOS/Android/iOS。
 5. Safari + macOS/iPhone/iPad。
-6. 新设备配旧系统时的兼容性警告。
+6. 华为浏览器 + HarmonyOS Phone，官方标准/浏览器兼容模式。
+7. ArkWeb 默认组件 + HarmonyOS Tablet/PC，确认不出现 `HuaweiBrowser` 与 `Mobile`（Phone 才有 Mobile）。
+8. 新设备配旧系统时的兼容性警告。
 
 ## 7. 本地验证
 

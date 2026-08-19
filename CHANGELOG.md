@@ -2,6 +2,20 @@
 
 所有重要变更记录在此文件中。
 
+## [1.2.0] - 2026-08-19
+
+### Added
+
+- 新增 HarmonyOS / OpenHarmony 平台、近年华为手机、平板与 HarmonyOS PC 设备档案。
+- 新增华为浏览器与 ArkWeb 默认 Web 组件两种 UA 类型。
+- 新增 HarmonyOS 5.0–7.0 系统档案，联动 Chrome 兼容版本、ArkWeb VersionCode 和华为浏览器实测代表版本。
+- JSON/CSV 导出新增 `harmonyUaType`、`arkWebVersion` 等鸿蒙字段。
+
+### Changed
+
+- 鸿蒙官方标准模式使用 `Phone/Tablet/PC; OpenHarmony M.S` 格式；浏览器兼容模式可生成带 `Android 10` 兼容字段和 `HuaweiBrowser` 后缀的实测结构。
+- 文档补充 ArkWeb 官方格式、兼容字段含义、数据更新与验证方法。
+
 ## [1.1.0] - 2026-08-15
 
 ### Added

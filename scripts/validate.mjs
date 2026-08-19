@@ -23,6 +23,12 @@ requireMatch(/function\s+exportCSV\s*\(/, '缺少 CSV 导出');
 requireMatch(/DATA_VERIFIED_AT\s*=\s*'\d{4}-\d{2}-\d{2}'/, '核验日期格式错误');
 requireMatch(/id="deviceBrand"/, '缺少设备品牌筛选');
 requireMatch(/fetch\('\.\/api\/browser-versions'/, '缺少同源浏览器版本接口');
+requireMatch(/data-browser="huawei"/, '缺少华为浏览器选项');
+requireMatch(/data-platform="harmonyos"/, '缺少 HarmonyOS 平台选项');
+requireMatch(/Phone'; OpenHarmony|OpenHarmony '\s*\+\s*os\.ua/, '缺少 OpenHarmony UA 生成逻辑');
+requireMatch(/ArkWeb\//, '缺少 ArkWeb UA 标识');
+requireMatch(/HuaweiBrowser\//, '缺少 HuaweiBrowser UA 标识');
+requireMatch(/harmonyUaType/, '缺少鸿蒙 UA 类型切换');
 
 const scripts = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/gi));
 if (scripts.length !== 1) {
@@ -35,10 +41,14 @@ if (scripts.length !== 1) {
   }
 }
 
-const deviceRecords = (html.match(/\{\s*id:'[^']+',\s*platform:'(?:windows|macos|android|iphone|ipad)'/g) || []).length;
+const deviceRecords = (html.match(/\{\s*id:'[^']+',\s*platform:'(?:windows|macos|android|iphone|ipad|harmonyos)'/g) || []).length;
 if (deviceRecords < 60) failures.push('设备/系统数据条目异常偏少：' + deviceRecords);
-const recentDeviceRows = (html.match(/^\s*'[^']+\|(?:windows|macos|android|iphone|ipad)\|/gm) || []).length;
+const recentDeviceRows = (html.match(/^\s*'[^']+\|(?:windows|macos|android|iphone|ipad|harmonyos)\|/gm) || []).length;
 if (recentDeviceRows < 100) failures.push('近五年补充设备条目异常偏少：' + recentDeviceRows);
+const harmonyDeviceRows = (html.match(/^\s*'[^']+\|harmonyos\|/gm) || []).length;
+if (harmonyDeviceRows < 15) failures.push('鸿蒙设备条目异常偏少：' + harmonyDeviceRows);
+const harmonyOsRecords = (html.match(/\{\s*id:'harmony-[^']+',\s*platform:'harmonyos'/g) || []).length;
+if (harmonyOsRecords < 5) failures.push('鸿蒙系统档案异常偏少：' + harmonyOsRecords);
 
 for (const relative of ['server.mjs', 'data/browser-versions.json', 'scripts/browser-data-lib.mjs', 'scripts/update-browser-data.mjs']) {
   if (!fs.existsSync(new URL(relative, root))) failures.push('缺少文件：' + relative);
@@ -64,3 +74,4 @@ console.log('- HTML 字节：' + Buffer.byteLength(html, 'utf8'));
 console.log('- 内联脚本：1');
 console.log('- 设备/系统条目（正则计数）：' + deviceRecords);
 console.log('- 近五年补充设备：' + recentDeviceRows);
+console.log('- 鸿蒙设备 / 系统档案：' + harmonyDeviceRows + ' / ' + harmonyOsRecords);

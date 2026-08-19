@@ -155,7 +155,7 @@
     .ghost-btn:hover, .secondary-btn:hover { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); }
     .ghost-btn:active, .secondary-btn:active, .primary-btn:active { transform: translateY(1px); }
 
-    .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
     .choice {
       position: relative;
       min-height: 72px;
@@ -188,9 +188,10 @@
     }
     .choice.edge .choice-mark { background: linear-gradient(135deg, #0ea5e9, #16a34a); }
     .choice.safari .choice-mark { background: linear-gradient(135deg, #38bdf8, #2563eb); }
+    .choice.huawei .choice-mark { background: linear-gradient(135deg, #ef4444, #b91c1c); }
 
     .section-title { margin: 20px 0 10px; font-size: 14px; font-weight: 800; }
-    .platform-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; }
+    .platform-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
     .platform-btn {
       min-width: 0;
       padding: 9px 5px;
@@ -438,12 +439,12 @@
         <h1>真实设备 UA 生成器</h1>
         <p class="subtitle">选择浏览器、平台、真实设备名称、型号、发布年份与系统版本，生成 User-Agent、UA Client Hints 和可导出的批量配置。</p>
       </div>
-      <div class="verified" id="verifiedBadge">✓ 数据核验于 2026-08-15</div>
+      <div class="verified" id="verifiedBadge">✓ 数据核验于 2026-08-19</div>
     </header>
 
     <div class="notice" role="note">
       <span class="notice-icon">ⓘ</span>
-      <div><strong>真实性说明：</strong>现代 Chrome / Edge 会主动精简 UA；Safari 也会冻结部分系统版本。iPhone、iPad、Mac、Windows 的具体机型通常不会出现在 UA 中。选择的设备仍会写入导出配置；Android 传统完整 UA 可包含真实型号代号。</div>
+      <div><strong>真实性说明：</strong>现代 Chrome / Edge 会主动精简 UA；Safari 也会冻结部分系统版本。iPhone、iPad、Mac、Windows 与鸿蒙的具体营销机型通常不会出现在 UA 中。鸿蒙采用 OpenHarmony + ArkWeb 官方格式；华为浏览器兼容 UA 可额外出现 Android 10，但这不代表设备运行 Android。</div>
     </div>
 
     <section class="workspace" aria-label="UA 生成工作区">
@@ -463,6 +464,9 @@
           <button class="choice safari" type="button" data-browser="safari">
             <span class="choice-mark">S</span>Apple Safari<small>WebKit</small>
           </button>
+          <button class="choice huawei" type="button" data-browser="huawei">
+            <span class="choice-mark">H</span>华为浏览器<small>ArkWeb</small>
+          </button>
         </div>
 
         <div class="section-title">设备平台</div>
@@ -472,6 +476,7 @@
           <button class="platform-btn" type="button" data-platform="android">Android</button>
           <button class="platform-btn" type="button" data-platform="iphone">iPhone</button>
           <button class="platform-btn" type="button" data-platform="ipad">iPad</button>
+          <button class="platform-btn" type="button" data-platform="harmonyos">HarmonyOS</button>
         </div>
 
         <div class="form-grid">
@@ -492,16 +497,23 @@
             <select id="osSelect"></select>
           </div>
           <div class="field full">
-            <label for="browserVersion">浏览器真实版本</label>
+            <label for="browserVersion" id="browserVersionLabel">浏览器真实版本</label>
             <select id="browserVersion"></select>
+          </div>
+          <div class="field full" id="harmonyUaTypeField" hidden>
+            <label for="harmonyUaType">鸿蒙 UA 类型</label>
+            <select id="harmonyUaType">
+              <option value="huawei">华为浏览器（追加 HuaweiBrowser 标识）</option>
+              <option value="arkweb">ArkWeb 默认 Web 组件（官方基础格式）</option>
+            </select>
           </div>
         </div>
 
         <div class="device-meta" id="deviceMeta" aria-live="polite"></div>
 
         <div class="mode-box" aria-label="UA 模式">
-          <button class="mode-btn active" type="button" data-mode="reduced">现代真实 UA</button>
-          <button class="mode-btn" type="button" data-mode="legacy">传统完整 UA</button>
+          <button class="mode-btn active" id="reducedModeBtn" type="button" data-mode="reduced">现代真实 UA</button>
+          <button class="mode-btn" id="legacyModeBtn" type="button" data-mode="legacy">传统完整 UA</button>
         </div>
         <p class="mode-help" id="modeHelp">按当前浏览器隐私策略冻结版本和型号；推荐用于真实流量模拟。</p>
       </div>
@@ -561,6 +573,7 @@
           <div class="source"><div><strong>Microsoft Edge Update API / Stable Notes</strong><span>Edge 151.0.4129.86；桌面 Edg、Android EdgA、iOS EdgiOS</span></div><a href="https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel" target="_blank" rel="noreferrer">查看发布说明 ↗</a></div>
           <div class="source"><div><strong>Apple Security Releases / Safari Notes</strong><span>Safari 26.6、iOS/iPadOS 26.6、macOS Tahoe 26.6 · 2026-07-27</span></div><a href="https://support.apple.com/en-us/100100" target="_blank" rel="noreferrer">查看 Apple 资料 ↗</a></div>
           <div class="source"><div><strong>Android Developers</strong><span>Android 16 · API 36，以及 Android 8.1–16 版本年表</span></div><a href="https://developer.android.com/about/versions/16" target="_blank" rel="noreferrer">查看 Android 资料 ↗</a></div>
+          <div class="source"><div><strong>Huawei HarmonyOS / OpenHarmony ArkWeb</strong><span>Phone / Tablet / PC、OpenHarmony、Chrome 兼容版本与 ArkWeb VersionCode 格式</span></div><a href="https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/web-default-useragent" target="_blank" rel="noreferrer">查看华为官方 UA 文档 ↗</a></div>
           <div class="source"><div><strong>Windows Release Health</strong><span>Windows 11 26H1 / 25H2 / 24H2 与官方 OS build</span></div><a href="https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information" target="_blank" rel="noreferrer">查看 Windows 资料 ↗</a></div>
           <div class="source"><div><strong>Apple / Google / Samsung 设备资料</strong><span>设备名称、型号标识与发布年份</span></div><a href="https://support.apple.com/en-us/108044" target="_blank" rel="noreferrer">查看设备资料 ↗</a></div>
         </div>
@@ -570,11 +583,12 @@
         <h2>JavaScript 调用</h2>
         <p>页面将生成器公开为 <code>window.UAGenerator</code>，可直接接入测试脚本。</p>
         <pre class="code-sample"><code>const result = UAGenerator.generate({
-  browser: 'chrome',
-  platform: 'android',
-  deviceId: 'pixel-10-pro-xl',
-  osId: 'android-16',
-  version: '152.0.7977.42',
+  browser: 'huawei',
+  platform: 'harmonyos',
+  deviceId: 'harmony-pura80-ultra',
+  osId: 'harmony-6-1-1',
+  version: '6.1.6.310',
+  harmonyUaType: 'huawei',
   mode: 'legacy'
 });
 
@@ -592,7 +606,7 @@ console.log(result.clientHints);</code></pre>
   (function () {
     'use strict';
 
-    var DATA_VERIFIED_AT = '2026-08-15';
+    var DATA_VERIFIED_AT = '2026-08-19';
     var state = { browser: 'chrome', platform: 'windows', mode: 'reduced', batch: [] };
 
     var platformNames = {
@@ -600,7 +614,20 @@ console.log(result.clientHints);</code></pre>
       macos: 'macOS',
       android: 'Android',
       iphone: 'iPhone',
-      ipad: 'iPad'
+      ipad: 'iPad',
+      harmonyos: 'HarmonyOS / OpenHarmony'
+    };
+    var browserNames = {
+      chrome: 'Google Chrome',
+      edge: 'Microsoft Edge',
+      safari: 'Apple Safari',
+      huawei: '华为浏览器 / ArkWeb'
+    };
+    var browserPlatforms = {
+      chrome: ['windows','macos','android','iphone','ipad'],
+      edge: ['windows','macos','android','iphone','ipad'],
+      safari: ['macos','iphone','ipad'],
+      huawei: ['harmonyos']
     };
 
     var devices = [
@@ -709,6 +736,27 @@ console.log(result.clientHints);</code></pre>
     // 近五年补充目录。Android 型号来自 Google Play 支持设备目录；Apple/Windows
     // 的型号和年份来自厂商技术规格页。竖线格式便于定期批量校对和维护。
     var recentDeviceRows = [
+      'harmony-pura80-ultra|harmonyos|Huawei|Huawei Pura 80 Ultra|旗舰影像手机 · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-pura80-pro|harmonyos|Huawei|Huawei Pura 80 Pro|旗舰手机 · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-pura80|harmonyos|Huawei|Huawei Pura 80|标准版 · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-pura-x|harmonyos|Huawei|Huawei Pura X|阔折叠屏 · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-nova14-ultra|harmonyos|Huawei|Huawei nova 14 Ultra|Ultra · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-nova14-pro|harmonyos|Huawei|Huawei nova 14 Pro|Pro · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-nova14|harmonyos|Huawei|Huawei nova 14|标准版 · HarmonyOS NEXT|2025||phone|2025|arm',
+      'harmony-matebook-fold|harmonyos|Huawei|Huawei MateBook Fold|Ultimate Design · HarmonyOS PC|2025||pc|2025|arm',
+      'harmony-matebook-pro|harmonyos|Huawei|Huawei MateBook Pro|HarmonyOS Edition|2025||pc|2025|arm',
+      'harmony-mate70-rs|harmonyos|Huawei|Huawei Mate 70 RS|Ultimate Design|2024||phone|2024|arm',
+      'harmony-mate70-pro-plus|harmonyos|Huawei|Huawei Mate 70 Pro+|Pro+|2024||phone|2024|arm',
+      'harmony-mate70-pro|harmonyos|Huawei|Huawei Mate 70 Pro|Pro|2024||phone|2024|arm',
+      'harmony-mate70|harmonyos|Huawei|Huawei Mate 70|标准版|2024||phone|2024|arm',
+      'harmony-mate-x6|harmonyos|Huawei|Huawei Mate X6|大折叠屏|2024||phone|2024|arm',
+      'harmony-pura70-ultra|harmonyos|Huawei|Huawei Pura 70 Ultra|Ultra|2024||phone|2024|arm',
+      'harmony-pura70-pro|harmonyos|Huawei|Huawei Pura 70 Pro|Pro|2024||phone|2024|arm',
+      'harmony-matepad-pro-132|harmonyos|Huawei|Huawei MatePad Pro 13.2|13.2-inch · HarmonyOS NEXT|2024||tablet|2024|arm',
+      'harmony-matepad-pro-122|harmonyos|Huawei|Huawei MatePad Pro 12.2|12.2-inch · HarmonyOS NEXT|2024||tablet|2024|arm',
+      'harmony-mate60-pro|harmonyos|Huawei|Huawei Mate 60 Pro|Pro · 可升级 HarmonyOS NEXT|2023||phone|2023|arm',
+      'harmony-mate60|harmonyos|Huawei|Huawei Mate 60|标准版 · 可升级 HarmonyOS NEXT|2023||phone|2023|arm',
+
       'surface-pro-13-x2|windows|Microsoft|Microsoft Surface Pro|13-inch · 12th Edition · Snapdragon X2|2026|||2026|arm',
       'surface-laptop-x2-138|windows|Microsoft|Microsoft Surface Laptop|13.8-inch · Snapdragon X2|2026|||2026|arm',
       'surface-laptop-x2-15|windows|Microsoft|Microsoft Surface Laptop|15-inch · Snapdragon X2|2026|||2026|arm',
@@ -916,6 +964,17 @@ console.log(result.clientHints);</code></pre>
       { id:'android-9', platform:'android', name:'Android 9 Pie', version:'9', year:2018, date:'2018-08-06', api:'API 28', ua:'9', ch:'9.0.0', timeline:2018 },
       { id:'android-8-1', platform:'android', name:'Android 8.1 Oreo', version:'8.1', year:2017, date:'2017-12-05', api:'API 27', ua:'8.1.0', ch:'8.1.0', timeline:2017 },
 
+      // HarmonyOS 的默认 Web UA 使用 OpenHarmony，而不是 Android 设备模板。
+      // chromeCompat / arkweb 来自 ArkWeb 官方格式及版本说明；浏览器后缀版本是实测代表档案。
+      { id:'harmony-7-0', platform:'harmonyos', name:'HarmonyOS 7.0', version:'7.0', year:2026, api:'API 26', ua:'7.0', timeline:2026, chromeCompat:'144', arkweb:'7.0.0.25', browserVersions:['6.1.4.321'], profileStatus:'当前设备实测代表档案' },
+      { id:'harmony-6-1-1', platform:'harmonyos', name:'HarmonyOS 6.1.1', version:'6.1.1', year:2026, api:'API 24', ua:'6.1', timeline:2026, chromeCompat:'132', arkweb:'6.1.0.120', browserVersions:['6.1.6.310','6.1.6.305','6.1.5.302'], profileStatus:'当前设备实测代表档案' },
+      { id:'harmony-6-1-0', platform:'harmonyos', name:'HarmonyOS 6.1.0', version:'6.1.0', year:2026, api:'API 23', ua:'6.1', timeline:2026, chromeCompat:'132', arkweb:'6.1.0.120', browserVersions:['6.1.6.310','6.1.6.305','6.1.5.302'], profileStatus:'当前设备实测代表档案' },
+      { id:'harmony-6-0-2', platform:'harmonyos', name:'HarmonyOS 6.0.2', version:'6.0.2', year:2026, api:'API 22', ua:'6.0', timeline:2026, chromeCompat:'132', arkweb:'6.0.0.130', browserVersions:['6.1.4.303','5.1.12.351'], profileStatus:'当前设备实测代表档案' },
+      { id:'harmony-6-0-1', platform:'harmonyos', name:'HarmonyOS 6.0.1', version:'6.0.1', year:2026, api:'API 21', ua:'6.0', timeline:2026, chromeCompat:'132', arkweb:'6.0.0.130', browserVersions:['6.1.4.303','5.1.12.351'], profileStatus:'当前设备实测代表档案' },
+      { id:'harmony-6-0-0', platform:'harmonyos', name:'HarmonyOS 6.0.0', version:'6.0.0', year:2025, api:'API 20', ua:'6.0', timeline:2025, chromeCompat:'132', arkweb:'6.0.0.44', browserVersions:['5.1.12.351','5.1.11.304'], profileStatus:'OpenHarmony ArkWeb 官方版本档案' },
+      { id:'harmony-5-1', platform:'harmonyos', name:'HarmonyOS 5.1', version:'5.1', year:2025, build:'HarmonyOS NEXT', ua:'5.1', timeline:2025, chromeCompat:'114', arkweb:'5.1.0.207', browserVersions:['5.1.12.303','5.1.9.315'], profileStatus:'OpenHarmony ArkWeb 官方版本档案' },
+      { id:'harmony-5-0', platform:'harmonyos', name:'HarmonyOS 5.0', version:'5.0', year:2024, build:'HarmonyOS NEXT', ua:'5.0', timeline:2024, chromeCompat:'114', arkweb:'4.1.6.1', browserVersions:['5.0.6.302'], profileStatus:'华为官方默认 UA 示例档案' },
+
       { id:'ios-26-6', platform:'iphone', name:'iOS 26.6', version:'26.6', year:2026, date:'2026-07-27', build:'23G', ua:'26_6', ch:'26.6.0', timeline:2026 },
       { id:'ios-26-5-2', platform:'iphone', name:'iOS 26.5.2', version:'26.5.2', year:2026, date:'2026-06-29', build:'23F', ua:'26_5_2', ch:'26.5.2', timeline:2026 },
       { id:'ios-26-4-2', platform:'iphone', name:'iOS 26.4.2', version:'26.4.2', year:2026, date:'2026-04-22', build:'23E', ua:'26_4_2', ch:'26.4.2', timeline:2026 },
@@ -964,12 +1023,16 @@ console.log(result.clientHints);</code></pre>
       safari: {
         desktop:['26.6','26.5.2','26.5','26.4','26.3','26.2','26.1','26.0','18.6','18.5','18.4','18.3','18.2','18.1','18.0','17.6','17.5','17.4','17.3','17.2','17.1','17.0'],
         ios:['26.6','26.5.2','26.5','26.4','26.3','26.2','26.1','26.0','18.6','18.5','18.4','18.3','18.2','18.1','18.0','17.6','17.5','17.4','17.3','17.2','17.1','17.0']
+      },
+      huawei: {
+        harmonyos:['6.1.6.310','6.1.6.305','6.1.5.302','6.1.4.321','6.1.4.303','5.1.12.351','5.1.12.303','5.1.9.315','5.0.6.302']
       }
     };
 
     function byId(list, id) { return list.find(function (item) { return item.id === id; }); }
     function major(version) { return String(version).split('.')[0]; }
     function getVersionBucket(browser, platform) {
+      if (browser === 'huawei') return 'harmonyos';
       if (browser === 'safari') return platform === 'macos' ? 'desktop' : 'ios';
       if (platform === 'android') return 'android';
       if (platform === 'iphone' || platform === 'ipad') return 'ios';
@@ -987,34 +1050,55 @@ console.log(result.clientHints);</code></pre>
       return found || (platform === 'windows' ? '通用 / 其他' : '其他');
     }
 
+    function syncChoiceState() {
+      document.querySelectorAll('[data-browser]').forEach(function (el) { el.classList.toggle('active', el.dataset.browser === state.browser); });
+      document.querySelectorAll('[data-platform]').forEach(function (el) {
+        el.classList.toggle('active', el.dataset.platform === state.platform);
+        el.disabled = browserPlatforms[state.browser].indexOf(el.dataset.platform) < 0;
+      });
+      var isHarmony = state.platform === 'harmonyos';
+      document.getElementById('harmonyUaTypeField').hidden = !isHarmony;
+      document.getElementById('reducedModeBtn').textContent = isHarmony ? '官方标准 UA' : '现代真实 UA';
+      document.getElementById('legacyModeBtn').textContent = isHarmony ? '浏览器兼容 UA' : '传统完整 UA';
+    }
+
     function setBrowser(browser) {
       state.browser = browser;
-      document.querySelectorAll('[data-browser]').forEach(function (el) { el.classList.toggle('active', el.dataset.browser === browser); });
-      document.querySelectorAll('[data-platform]').forEach(function (el) {
-        var disabled = browser === 'safari' && ['windows','android'].indexOf(el.dataset.platform) >= 0;
-        el.disabled = disabled;
-      });
-      if (browser === 'safari' && ['windows','android'].indexOf(state.platform) >= 0) setPlatform('macos');
-      else { populateBrowserVersions(); render(); }
+      var allowed = browserPlatforms[browser];
+      if (allowed.indexOf(state.platform) < 0) {
+        setPlatform(allowed[0]);
+        return;
+      }
+      syncChoiceState();
+      populateBrowserVersions();
+      setMode(state.mode);
     }
 
     function setPlatform(platform) {
+      if (platform === 'harmonyos' && state.browser !== 'huawei') state.browser = 'huawei';
+      if (platform !== 'harmonyos' && state.browser === 'huawei') state.browser = 'chrome';
       state.platform = platform;
-      document.querySelectorAll('[data-platform]').forEach(function (el) { el.classList.toggle('active', el.dataset.platform === platform); });
+      syncChoiceState();
       populateYears();
       populateBrands();
       populateDevices();
       populateOS();
       populateBrowserVersions();
-      render();
+      setMode(state.mode);
     }
 
     function setMode(mode) {
       state.mode = mode;
       document.querySelectorAll('[data-mode]').forEach(function (el) { el.classList.toggle('active', el.dataset.mode === mode); });
-      document.getElementById('modeHelp').textContent = mode === 'reduced'
-        ? '按当前浏览器隐私策略冻结版本和型号；推荐用于真实流量模拟。'
-        : '保留完整浏览器版本、Android 机型与系统版本；适合兼容性测试，不代表现代浏览器默认上报。';
+      if (state.platform === 'harmonyos') {
+        document.getElementById('modeHelp').textContent = mode === 'reduced'
+          ? '使用华为官方 ArkWeb 基础格式，仅包含 OpenHarmony、Chrome 兼容版本与 ArkWeb 内核版本。'
+          : '使用华为浏览器实测兼容格式，可加入 Android 10 兼容字段；它不代表设备运行 Android。';
+      } else {
+        document.getElementById('modeHelp').textContent = mode === 'reduced'
+          ? '按当前浏览器隐私策略冻结版本和型号；推荐用于真实流量模拟。'
+          : '保留完整浏览器版本、Android 机型与系统版本；适合兼容性测试，不代表现代浏览器默认上报。';
+      }
       render();
     }
 
@@ -1066,11 +1150,21 @@ console.log(result.clientHints);</code></pre>
 
     function populateBrowserVersions() {
       var select = document.getElementById('browserVersion');
+      var labelEl = document.getElementById('browserVersionLabel');
       var bucket = getVersionBucket(state.browser, state.platform);
-      var list = (browserVersions[state.browser][bucket] || browserVersions[state.browser].desktop || []).slice();
+      var os = currentOS();
+      var harmonyUaType = document.getElementById('harmonyUaType').value;
+      var list;
+      if (state.browser === 'huawei' && os) {
+        list = harmonyUaType === 'arkweb' ? [os.arkweb] : (os.browserVersions || browserVersions.huawei.harmonyos).slice();
+        labelEl.textContent = harmonyUaType === 'arkweb' ? 'ArkWeb 内核版本（随系统联动）' : '华为浏览器版本（实测代表版本）';
+      } else {
+        list = (browserVersions[state.browser][bucket] || browserVersions[state.browser].desktop || []).slice();
+        labelEl.textContent = '浏览器真实版本';
+      }
       var old = select.value;
       select.innerHTML = list.map(function (v, i) {
-        var label = v + (i === 0 ? ' · 当前稳定' : '');
+        var label = v + (i === 0 ? (state.browser === 'huawei' ? ' · 当前档案' : ' · 当前稳定') : '');
         return '<option value="' + v + '">' + label + '</option>';
       }).join('');
       if (list.indexOf(old) >= 0) select.value = old;
@@ -1080,6 +1174,7 @@ console.log(result.clientHints);</code></pre>
       var browser = config.browser;
       var platform = config.platform;
       var mode = config.mode || 'reduced';
+      var harmonyUaType = config.harmonyUaType || 'huawei';
       var version = config.version;
       var device = byId(devices, config.deviceId) || devices.find(function (d) { return d.platform === platform; });
       var os = byId(osVersions, config.osId) || osVersions.find(function (o) { return o.platform === platform; });
@@ -1121,6 +1216,14 @@ console.log(result.clientHints);</code></pre>
           if (mode === 'reduced') ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/' + version + ' Safari/605.1.15';
           else ua = 'Mozilla/5.0 (iPad; CPU OS ' + os.ua + ' like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/' + version + ' Mobile/15E148 Safari/604.1';
         }
+      }
+
+      if (browser === 'huawei' && platform === 'harmonyos') {
+        var harmonyDeviceType = device.formFactor === 'tablet' ? 'Tablet' : device.formFactor === 'pc' ? 'PC' : 'Phone';
+        var harmonyCompat = mode === 'legacy' && harmonyUaType === 'huawei' ? '; Android 10' : '';
+        var harmonyMobile = harmonyDeviceType === 'Phone' ? ' Mobile' : '';
+        ua = 'Mozilla/5.0 (' + harmonyDeviceType + '; OpenHarmony ' + os.ua + harmonyCompat + ') AppleWebKit/537.36 (KHTML, like Gecko) Chrome/' + os.chromeCompat + '.0.0.0 Safari/537.36  ArkWeb/' + os.arkweb + harmonyMobile;
+        if (harmonyUaType === 'huawei') ua += ' HuaweiBrowser/' + version;
       }
 
       var hints = null;
@@ -1169,6 +1272,10 @@ console.log(result.clientHints);</code></pre>
           osYear: os.year,
           osBuild: os.build || os.api || '',
           mode: mode,
+          harmonyUaType: platform === 'harmonyos' ? harmonyUaType : '',
+          chromeCompatibleVersion: platform === 'harmonyos' ? os.chromeCompat + '.0.0.0' : '',
+          arkWebVersion: platform === 'harmonyos' ? os.arkweb : '',
+          uaProfileStatus: platform === 'harmonyos' ? os.profileStatus : '',
           verifiedAt: DATA_VERIFIED_AT
         }
       };
@@ -1181,7 +1288,8 @@ console.log(result.clientHints);</code></pre>
         deviceId: currentDevice().id,
         osId: currentOS().id,
         version: currentVersion(),
-        mode: state.mode
+        mode: state.mode,
+        harmonyUaType: document.getElementById('harmonyUaType').value
       });
     }
 
@@ -1191,8 +1299,9 @@ console.log(result.clientHints);</code></pre>
       var version = currentVersion();
       if (!device || !os || !version) return;
       var result = getCurrentResult();
+      var browserDisplayName = state.browser === 'huawei' && result.config.harmonyUaType === 'arkweb' ? 'ArkWeb 默认组件' : browserNames[state.browser];
       document.getElementById('uaText').textContent = result.ua;
-      document.getElementById('resultSummary').textContent = device.name + ' · ' + os.name + ' · ' + (state.browser === 'chrome' ? 'Chrome ' : state.browser === 'edge' ? 'Edge ' : 'Safari ') + version;
+      document.getElementById('resultSummary').textContent = device.name + ' · ' + os.name + ' · ' + browserDisplayName + ' ' + version;
       var status = document.getElementById('compatStatus');
       status.textContent = result.warning || '组合有效';
       status.classList.toggle('warning', !!result.warning);
@@ -1205,7 +1314,7 @@ console.log(result.clientHints);</code></pre>
 
       var c = result.config;
       var details = [
-        ['浏览器', (state.browser === 'chrome' ? 'Google Chrome' : state.browser === 'edge' ? 'Microsoft Edge' : 'Apple Safari') + ' ' + c.browserVersion],
+        ['浏览器', browserDisplayName + ' ' + c.browserVersion],
         ['设备平台', c.platformName],
         ['设备品牌', c.deviceBrand],
         ['设备名称', c.deviceName],
@@ -1214,17 +1323,29 @@ console.log(result.clientHints);</code></pre>
         ['操作系统', c.osName],
         ['系统发布年份', String(c.osYear)],
         ['系统 Build / API', c.osBuild],
-        ['UA 模式', c.mode === 'reduced' ? '现代真实（精简 / 冻结）' : '传统完整（兼容测试）'],
+        ['UA 模式', state.platform === 'harmonyos'
+          ? (c.mode === 'reduced' ? '官方标准格式' : '浏览器兼容格式（可含 Android 10 兼容字段）')
+          : (c.mode === 'reduced' ? '现代真实（精简 / 冻结）' : '传统完整（兼容测试）')],
         ['数据核验日期', c.verifiedAt],
         ['UA 是否暴露机型', state.platform === 'android' && state.mode === 'legacy' ? '是：' + device.uaModel : '否（平台隐私策略或格式限制）']
       ];
+      if (state.platform === 'harmonyos') {
+        details.splice(9, 0,
+          ['鸿蒙 UA 类型', c.harmonyUaType === 'arkweb' ? 'ArkWeb 默认 Web 组件' : '华为浏览器'],
+          ['Chrome 兼容版本', c.chromeCompatibleVersion],
+          ['ArkWeb 版本', c.arkWebVersion],
+          ['UA 档案口径', c.uaProfileStatus]
+        );
+      }
       document.getElementById('detailList').innerHTML = details.map(function (row) {
         return '<div class="kv"><dt>' + row[0] + '</dt><dd>' + row[1] + '</dd></div>';
       }).join('');
 
       var hintsEl = document.getElementById('hintsList');
       if (!result.clientHints) {
-        hintsEl.innerHTML = '<div class="empty-hints">Safari 以及 iOS / iPadOS 上基于 WebKit 的第三方浏览器不提供 Chromium UA Client Hints。请使用上方 User-Agent，并结合功能检测。</div>';
+        hintsEl.innerHTML = '<div class="empty-hints">' + (state.platform === 'harmonyos'
+          ? 'ArkWeb / 华为浏览器的 UA Client Hints 取决于具体宿主与版本，本工具不虚构未由官方格式保证的请求头。请使用 OpenHarmony、ArkWeb 与 HuaweiBrowser 标识进行识别。'
+          : 'Safari 以及 iOS / iPadOS 上基于 WebKit 的第三方浏览器不提供 Chromium UA Client Hints。请使用上方 User-Agent，并结合功能检测。') + '</div>';
       } else {
         hintsEl.innerHTML = '<dl>' + Object.keys(result.clientHints).map(function (key) {
           return '<div class="kv"><dt>' + key + '</dt><dd>' + result.clientHints[key] + '</dd></div>';
@@ -1235,7 +1356,7 @@ console.log(result.clientHints);</code></pre>
 
     function randomItem(list) { return list[Math.floor(Math.random() * list.length)]; }
     function randomizeCurrent() {
-      var allowedPlatforms = state.browser === 'safari' ? ['macos','iphone','ipad'] : ['windows','macos','android','iphone','ipad'];
+      var allowedPlatforms = browserPlatforms[state.browser];
       setPlatform(randomItem(allowedPlatforms));
       var deviceList = devices.filter(function (d) { return d.platform === state.platform; });
       var device = randomItem(deviceList);
@@ -1246,21 +1367,25 @@ console.log(result.clientHints);</code></pre>
       document.getElementById('deviceSelect').value = device.id;
       var validOS = osVersions.filter(function (os) { return os.platform === state.platform && (!device.minTimeline || os.timeline >= device.minTimeline); });
       document.getElementById('osSelect').value = randomItem(validOS).id;
+      populateBrowserVersions();
       var versions = Array.from(document.getElementById('browserVersion').options);
       document.getElementById('browserVersion').value = randomItem(versions).value;
       render();
     }
 
     function randomResult() {
-      var browsers = ['chrome','edge','safari'];
+      var browsers = ['chrome','edge','safari','huawei'];
       var browser = randomItem(browsers);
-      var platform = randomItem(browser === 'safari' ? ['macos','iphone','ipad'] : ['windows','macos','android','iphone','ipad']);
+      var platform = randomItem(browserPlatforms[browser]);
       var device = randomItem(devices.filter(function (d) { return d.platform === platform; }));
       var validOS = osVersions.filter(function (os) { return os.platform === platform && (!device.minTimeline || os.timeline >= device.minTimeline); });
       var os = randomItem(validOS);
       var bucket = getVersionBucket(browser, platform);
-      var version = randomItem(browserVersions[browser][bucket] || browserVersions[browser].desktop);
-      return generateUA({ browser:browser, platform:platform, deviceId:device.id, osId:os.id, version:version, mode:Math.random() > .72 ? 'legacy' : 'reduced' });
+      var harmonyUaType = browser === 'huawei' && Math.random() > .75 ? 'arkweb' : 'huawei';
+      var version = browser === 'huawei'
+        ? (harmonyUaType === 'arkweb' ? os.arkweb : randomItem(os.browserVersions || browserVersions.huawei.harmonyos))
+        : randomItem(browserVersions[browser][bucket] || browserVersions[browser].desktop);
+      return generateUA({ browser:browser, platform:platform, deviceId:device.id, osId:os.id, version:version, mode:Math.random() > .72 ? 'legacy' : 'reduced', harmonyUaType:harmonyUaType });
     }
 
     function addBatch(result) {
@@ -1327,10 +1452,10 @@ console.log(result.clientHints);</code></pre>
     function csvEscape(value) { return '"' + String(value == null ? '' : value).replace(/"/g, '""') + '"'; }
     function exportCSV() {
       if (!state.batch.length) addBatch();
-      var headers = ['browser','browserVersion','platform','deviceBrand','deviceName','deviceVariant','deviceYear','osName','osVersion','osYear','mode','userAgent'];
+      var headers = ['browser','browserVersion','platform','deviceBrand','deviceName','deviceVariant','deviceYear','osName','osVersion','osYear','mode','harmonyUaType','arkWebVersion','userAgent'];
       var rows = state.batch.map(function (item) {
         var c = item.config;
-        return [c.browser,c.browserVersion,c.platform,c.deviceBrand,c.deviceName,c.deviceVariant,c.deviceYear,c.osName,c.osVersion,c.osYear,c.mode,item.ua].map(csvEscape).join(',');
+        return [c.browser,c.browserVersion,c.platform,c.deviceBrand,c.deviceName,c.deviceVariant,c.deviceYear,c.osName,c.osVersion,c.osYear,c.mode,c.harmonyUaType,c.arkWebVersion,item.ua].map(csvEscape).join(',');
       });
       download('ua-configs-' + DATA_VERIFIED_AT + '.csv', '\ufeff' + headers.join(',') + '\n' + rows.join('\n'), 'text/csv;charset=utf-8');
     }
@@ -1411,8 +1536,9 @@ console.log(result.clientHints);</code></pre>
     document.getElementById('deviceYear').addEventListener('change', function () { populateBrands(); populateDevices(); render(); });
     document.getElementById('deviceBrand').addEventListener('change', function () { populateDevices(); render(); });
     document.getElementById('deviceSelect').addEventListener('change', render);
-    document.getElementById('osSelect').addEventListener('change', render);
+    document.getElementById('osSelect').addEventListener('change', function () { populateBrowserVersions(); render(); });
     document.getElementById('browserVersion').addEventListener('change', render);
+    document.getElementById('harmonyUaType').addEventListener('change', function () { populateBrowserVersions(); render(); });
     document.getElementById('copyUaBtn').addEventListener('click', function () { copyText(getCurrentResult().ua, 'UA 已复制'); });
     document.getElementById('copyUaMini').addEventListener('click', function () { copyText(getCurrentResult().ua, 'UA 已复制'); });
     document.getElementById('copyAllBtn').addEventListener('click', function () { copyText(resultAsText(getCurrentResult()), 'UA 与 Client Hints 已复制'); });
